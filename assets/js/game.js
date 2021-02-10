@@ -1,6 +1,6 @@
 var playerName = window.prompt("What is your robot's name?");
-var playerHealth = 100;
-var playerAttack = 30;
+var playerHealth = 50;
+var playerAttack = 10;
 var playerMoney = 10;
 
 // You can also log multiple values at once like this
@@ -75,8 +75,17 @@ var fight = function (enemyName) {
     }
   };
 
+
+  // function to start a new game
+var startGame = function() {
+  //debugger;
   // fight each enemy-robot by looping over them and fighting them one at a time
 for (var i = 0; i < enemyNames.length; i++) {
+  // reset player stats
+  playerHealth = 50;
+  playerAttack = 10;
+  playerMoney = 10;
+
   // if player is still alive, keep fighting
   if (playerHealth > 0) {
     // let player know what round they are in, remember that arrays start at 0 so it needs to have 1 added to it
@@ -99,6 +108,42 @@ for (var i = 0; i < enemyNames.length; i++) {
     window.alert('You have lost your robot in battle! Game Over!');
   }
 }
+//aftrer the loop ends, player is either out of health or enemies to fight, so run the endGame function
+endGame();
+
+};
+
+
+// function to end the entire game
+var endGame = function() {
+  // if player is still alive, player wins!
+  if (playerHealth > 0) {
+    window.alert("great job, you've survived the game! You now have a score of " + playerMoney + "."); 
+  }
+  else {
+    window.alert("You've lost your robot in battle.");
+  }
+  // ask player if they'd like to play agian
+  var playAgainConfirm = window.confirm("would you like to play again?");
+  
+  if (playAgainConfirm) {
+    // restart the game
+    startGame()
+  }
+  else {
+    window.alert("Thank you for playing Robot ladiators! Come back soon!");
+  }
+};
+  
+
+
+
+//start the game when the page loads
+startGame()
+
+
+
+
 
 
 /////////////////////////////////////////////
