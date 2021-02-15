@@ -45,6 +45,21 @@ var endGame = function () {
     window.alert("You've lost your robot in battle!");
   }
 
+  var highScore = localStorage.getItem('highScore');
+  if (highScore === null) {
+    highScore = 0;
+  }
+
+  if (playerInfo.money > highScore) {
+    localStorage.setItem('highScore', playerInfo.money);
+    localStorage.setItem('name', playerInfo.name);
+    
+    alert(playerInfo.name + " now has the high score of " + playerInfo.money + "!");
+  }
+  else { 
+    alert(playerInfo.name + " did not beat the high score of " + highScore + ". Maybe next time!");
+  }
+
   // play agian? confirm.
   var playAgainConfirm = window.confirm("would you like to play again?");
  
@@ -84,7 +99,7 @@ var fightOrSkip = function() {
 }
 
 var fight = function(enemy) {
-  debugger;
+  //debugger;
   // keep track of who goes first
   var isPlayerTurn = true;
   // randomly change turn order
@@ -121,6 +136,8 @@ var fight = function(enemy) {
         
         // award player money for winning
         playerInfo.money = playerInfo.money + 20;
+
+        shop();
        
         // leave while() loop since enemy is dead
         break;
